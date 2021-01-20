@@ -19,7 +19,7 @@ public class User {
 	private String zip;
 	@Column(nullable=false, unique = true)
 	private String username;
-	private String pass;
+	private String password;
 	
 	public int getId() {
 		return id;
@@ -69,11 +69,11 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

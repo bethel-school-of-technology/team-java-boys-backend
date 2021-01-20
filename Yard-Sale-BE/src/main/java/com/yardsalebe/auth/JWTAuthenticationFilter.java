@@ -26,7 +26,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		try {
 			com.yardsalebe.controllers.User creds = new ObjectMapper().readValue(
 					req.getInputStream(),
-					com.yardsalebe.auth.User.class);
+					com.yardsalebe.controllers.User.class);
 
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
 					creds.getPassword(), new ArrayList<>()));
