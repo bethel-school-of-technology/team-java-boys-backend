@@ -16,6 +16,13 @@ public class Post {
 		private String state;
 		private String zip;
 		
+		
+		public String getUserName() {
+			return userName;
+		}
+		public void setUserName(String userName) {
+			this.userName = userName;
+		}
 		public String getStreetAddress() {
 			return streetAddress;
 		}

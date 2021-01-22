@@ -39,8 +39,12 @@ public class PostController {
 	
 	@PostMapping("")
 	public ResponseEntity<Post> postMessage(@RequestBody Post post, @RequestBody User user) {
-		post.setAuthorID(Integer.toString(user.getID())); 
+		post.setUserName(user.getUsername()); 
 		post.setTimeStamp(LocalDateTime.now());
+		post.setStreetAddress(user.getStreetAddress());
+		post.setCity(user.getCity());
+		post.setState(user.getState());
+		post.setZip(user.getZip());
 		Post createdPost = dao.save(post);
 	    return ResponseEntity.ok(createdPost);
 	}

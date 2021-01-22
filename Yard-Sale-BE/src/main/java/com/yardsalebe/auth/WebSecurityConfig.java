@@ -11,6 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.*;
+
+import com.yardsalebe.controllers.MySQLUserDetailsService;
+
 import static com.yardsalebe.auth.AuthConstants.*;
 
 @EnableWebSecurity
