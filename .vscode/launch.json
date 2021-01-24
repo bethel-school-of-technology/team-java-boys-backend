@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-YardSaleBeApplication<Yard-Sale-BE>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.yardsalebe.YardSaleBeApplication",
+            "projectName": "Yard-Sale-BE",
+            "args": ""
+        }
+    ]
+}
