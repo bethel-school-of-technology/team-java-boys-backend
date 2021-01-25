@@ -1,6 +1,5 @@
 package com.yardsalebe.controllers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,9 @@ public class PostController {
 	@Autowired
 	PostRepository dao;
 	
-	@GetMapping("")
-	public List<Post> getPosts() {
-	    List<Post> foundPosts = dao.findAll();
-	    return foundPosts;
+	@GetMapping()
+	public List<Post> getPost() {
+		return dao.findAll();
 	}
 	
 	@GetMapping("/{ID}")
@@ -37,17 +35,24 @@ public class PostController {
         return ResponseEntity.ok(foundPost);
 	}
 	
-	@PostMapping("")
-	public ResponseEntity<Post> postMessage(@RequestBody Post post, @RequestBody User user) {
-		post.setUserName(user.getUsername()); 
-		post.setTimeStamp(LocalDateTime.now());
-		post.setStreetAddress(user.getStreetAddress());
-		post.setCity(user.getCity());
-		post.setState(user.getState());
-		post.setZip(user.getZip());
-		Post createdPost = dao.save(post);
-	    return ResponseEntity.ok(createdPost);
-	}
+	// @PostMapping()
+	// public ResponseEntity<Post> postMessage(@RequestBody Post post, @RequestBody User user) {
+	// 	// post.setUserName(user.getUsername()); 
+	// 	post.setTimeStamp(LocalDateTime.now());
+	// 	post.setStreetAddress(user.getStreetAddress());
+	// 	post.setCity(user.getCity());
+	// 	post.setState(user.getState());
+	// 	post.setZip(user.getZip());
+	// 	Post createdPost = dao.save(post);
+	//     return ResponseEntity.ok(createdPost);
+	// }
+
+	@PostMapping()
+    public ResponseEntity<Post> postMessage(@RequestBody Post message) {
+		Post createdPost=dao.save(message);	
+		System.out.println(createdPost);
+        return ResponseEntity.ok(createdPost);  
+    }
 	
 	@PutMapping()
     public ResponseEntity<Post> updatePost(@PathVariable(value="ID") Integer id, @RequestBody Post post) {
