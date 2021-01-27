@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .csrf().disable()
       .authorizeRequests().antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-      .antMatchers("/user", "/login", "/user/register", "/post").permitAll()
-      .antMatchers(HttpMethod.GET, "/post/**").permitAll()
-      .antMatchers(HttpMethod.GET, "/post").permitAll()
+      // .antMatchers("/user", "/login", "/user/register", "/post").permitAll()
+      // .antMatchers(HttpMethod.GET, "/post/**").permitAll()
+      // .antMatchers(HttpMethod.GET, "/post").permitAll()
       .anyRequest().authenticated()
       .and()
       .addFilter(new JWTAuthenticationFilter(authenticationManager()))
@@ -52,6 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.applyPermitDefaultValues();
+    // corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+    // corsConfig.setExposedHeaders(Arrays.asList("Authorization"));
+    corsConfig.setAllowCredentials(true);
+    corsConfig.setAllowedHeaders(Arrays.asList("*"));
+    corsConfig.setAllowedOrigins(Arrays.asList("*"));
+    corsConfig.setAllowedMethods(Arrays.asList("*"));
     corsConfig.setExposedHeaders(Arrays.asList("Authorization"));
     source.registerCorsConfiguration("/**", corsConfig);
     return source;

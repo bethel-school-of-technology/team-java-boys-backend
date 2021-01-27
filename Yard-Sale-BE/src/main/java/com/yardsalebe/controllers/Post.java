@@ -16,6 +16,15 @@ public class Post {
 		private String endDate;
 		private String startTime;
 		private String endTime;
+		private String categories;
+
+	public String getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
 
 	public String getStartDate() {
 		return this.startDate;
