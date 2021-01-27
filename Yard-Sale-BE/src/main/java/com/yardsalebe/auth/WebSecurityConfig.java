@@ -52,8 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.applyPermitDefaultValues();
-    // corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    // corsConfig.setExposedHeaders(Arrays.asList("Authorization"));
     corsConfig.setAllowCredentials(true);
     corsConfig.setAllowedHeaders(Arrays.asList("*"));
     corsConfig.setAllowedOrigins(Arrays.asList("*"));
