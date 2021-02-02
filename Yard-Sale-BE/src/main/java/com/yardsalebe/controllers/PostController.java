@@ -1,5 +1,8 @@
 package com.yardsalebe.controllers;
 
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,61 @@ public class PostController {
 
 	@Autowired
 	PostRepository dao;
+
+	@Autowired
+	UserRepository userRepo;
 	
-	@GetMapping()
-	public List<Post> getPost() {
-		return dao.findAll();
+	@GetMapping("")
+	public List<Post> getPosts() {
+	    List<Post> foundPosts = dao.findAll();
+	    return foundPosts;
 	}
+	
+	@GetMapping("/search/state/{state}") 
+	public ResponseEntity<List<Post>> getPostByState(@PathVariable String state) {
+		
+		List<Post> foundPosts = dao.findAll();
+System.out.println(state);
+		List<Post> searchPost = new ArrayList<Post>();
+		
+		for (Post post : foundPosts){
+			post.toString();
+			System.out.println(post.getState());
+			if (post.getState().equals(state)){
+				searchPost.add(post);
+				System.out.println("found post with the state");
+			}
+		}
+        return ResponseEntity.ok(searchPost);
+	}
+
+// 	@GetMapping("/search/city/{city}") 
+// 	public ResponseEntity<List<Post>> getPostByState(@PathVariable String city) {
+		
+// 		List<Post> foundPosts = dao.findAll();
+// System.out.println(city);
+// 		List<Post> searchPost = new ArrayList<Post>();
+		
+// 		for (Post post : foundPosts){
+// 			post.toString();
+// 			System.out.println(post.getState());
+// 			if (post.getState().equals(state)){
+// 				searchPost.add(post);
+// 				System.out.println("found post with the state");
+// 			}
+// 		}
+//         return ResponseEntity.ok(searchPost);
+	// }
+
+	// @GetMapping("/serach/city/{cityName}")
+	// public ResponseEntity<Post> getPostByCity(@PathVariable(value="city") String city) {
+    //     Post foundPost = dao.findAll(city).orElse(null);
+
+    //     if(foundPost == null) {
+    //         return ResponseEntity.notFound().header("Message","Nothing found with that city name").build();
+    //     }
+    //     return ResponseEntity.ok(foundPost);
+	// }
 	
 	@GetMapping("/{ID}")
     public ResponseEntity<Post> getPost(@PathVariable(value="ID") Integer id) {
@@ -34,27 +87,24 @@ public class PostController {
         }
         return ResponseEntity.ok(foundPost);
 	}
-	
-	// @PostMapping()
-	// public ResponseEntity<Post> postMessage(@RequestBody Post post, @RequestBody User user) {
-	// 	// post.setUserName(user.getUsername()); 
-	// 	post.setTimeStamp(LocalDateTime.now());
-	// 	post.setStreetAddress(user.getStreetAddress());
-	// 	post.setCity(user.getCity());
-	// 	post.setState(user.getState());
-	// 	post.setZip(user.getZip());
-	// 	Post createdPost = dao.save(post);
-	//     return ResponseEntity.ok(createdPost);
-	// }
 
-	@PostMapping()
-    public ResponseEntity<Post> postMessage(@RequestBody Post message) {
-		Post createdPost=dao.save(message);	
-		System.out.println(createdPost);
-        return ResponseEntity.ok(createdPost);  
-    }
 	
-	@PutMapping()
+	@PostMapping("")
+	public ResponseEntity<Post> postMessage(@RequestBody Post post, Principal myPrincipal) {
+		System.out.println(myPrincipal.getName());
+		post.setuserName(myPrincipal.getName());
+
+		User currentUser = userRepo.findByUsername(myPrincipal.getName());
+		post.setTimeStamp(LocalDateTime.now());
+		post.setStreetAddress(currentUser.getStreetAddress());
+		post.setCity(currentUser.getCity());
+		post.setState(currentUser.getState());
+		post.setZip(currentUser.getZip());
+		Post createdPost = dao.save(post);
+	    return ResponseEntity.ok(createdPost);
+	}
+	
+	@PutMapping("/{ID}")
     public ResponseEntity<Post> updatePost(@PathVariable(value="ID") Integer id, @RequestBody Post post) {
 		Post foundPost = dao.findById(id).orElse(null);
     	
@@ -64,7 +114,9 @@ public class PostController {
         	Post updatedPost = dao.save(post);
         	return ResponseEntity.ok(updatedPost);
     	}
-    }
+	}
+	
+
 	
     @DeleteMapping("/{ID}")
     public ResponseEntity<Post> deleteMessage(@PathVariable(value="ID") Integer id) {

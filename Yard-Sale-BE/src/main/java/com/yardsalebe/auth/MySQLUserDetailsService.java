@@ -1,4 +1,4 @@
-package com.yardsalebe.controllers;
+package com.yardsalebe.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.yardsalebe.controllers.UserRepository;
 
 @Service
 public class MySQLUserDetailsService implements UserDetailsService {
@@ -19,16 +21,16 @@ public class MySQLUserDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) {
-    User user = userRepository.findByUsername(username);
+    com.yardsalebe.controllers.User user = userRepository.findByUsername(username);
     if (user == null) {
       throw new UsernameNotFoundException(username);
     }
     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities());
   }
 
-  public UserDetails Save(User newUser) {
+  public UserDetails Save(com.yardsalebe.controllers.User newUser) {
     newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-    User savedUser = userRepository.save(newUser);
+    com.yardsalebe.controllers.User savedUser = userRepository.save(newUser);
     return new org.springframework.security.core.userdetails.User(savedUser.getUsername(), savedUser.getPassword(), getAuthorities());
   }
 
