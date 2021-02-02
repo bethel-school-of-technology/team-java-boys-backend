@@ -17,6 +17,62 @@ public class Post {
 		private String state;
 		private String zip;
 		
+		private String startDate;
+		private String endDate;
+		private String startTime;
+		private String endTime;
+		private String categories;
+
+
+	public int getAuthorID() {
+		return this.authorID;
+	}
+
+	public void setAuthorID(int authorID) {
+		this.authorID = authorID;
+	}
+
+	public String getStartDate() {
+		return this.startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return this.endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
+		
 		public String getStreetAddress() {
 			return this.streetAddress;
 		}
@@ -40,12 +96,6 @@ public class Post {
 		}
 		public void setZip(String zip) {
 			this.zip = zip;
-		}
-		public int getauthorID() {
-			return this.authorID;
-		}
-		public void setAuthorId(int authorID) {
-			this.authorID = authorID;
 		}
 		public int getID() {
 			return this.ID;

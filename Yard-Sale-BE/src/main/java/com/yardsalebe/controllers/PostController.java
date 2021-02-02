@@ -26,12 +26,11 @@ public class PostController {
 	@Autowired
 	UserRepository userRepo;
 	
-	@GetMapping("")
-	public List<Post> getPosts() {
-	    List<Post> foundPosts = dao.findAll();
-	    return foundPosts;
+	@GetMapping()
+	public List<Post> getPost() {
+		return dao.findAll();
 	}
-	
+
 	@GetMapping("/search/state/{state}") 
 	public ResponseEntity<List<Post>> getPostByState(@PathVariable String state) {
 		
