@@ -23,12 +23,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException {
-				System.out.println(req.toString());
 		try {
 			com.yardsalebe.controllers.User creds = new ObjectMapper().readValue(
 					req.getInputStream(),
 					com.yardsalebe.controllers.User.class);
-					
+
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
 					creds.getPassword(), new ArrayList<>()));
 		} catch (IOException e) {
@@ -42,7 +41,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String token = JWT.create().withSubject(((User) auth.getPrincipal()).getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).sign(HMAC512(SECRET.getBytes()));
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-		res.setHeader(HEADER_STRING, TOKEN_PREFIX + token);
 	}
 
 	@Override

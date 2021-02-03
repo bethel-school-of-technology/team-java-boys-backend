@@ -20,15 +20,6 @@ public class User {
 	@Column(nullable=false, unique = true)
 	private String username;
 	private String password;
-	private String email;
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
 	public int getId() {
 		return id;
