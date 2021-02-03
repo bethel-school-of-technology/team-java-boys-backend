@@ -1,5 +1,6 @@
 package com.yardsalebe.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,14 @@ public class UserController {
   }
   
   @GetMapping("")
-	public List<User> getUsers() {
-	    List<User> foundUsers = dao.findAll();
-	    return foundUsers;
-	}
+  public List<User> getUsers() {
+	  List<User> foundUsers = dao.findAll();
+	  return foundUsers;
+  }
+  
+  @GetMapping("/profile")
+  public User getProfile(Principal myPrincipal ) {
+	  User foundProfile = dao.findByUsername(myPrincipal.getName());
+	  return foundProfile;
+  }
 }
