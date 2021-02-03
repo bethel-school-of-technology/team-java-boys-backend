@@ -16,12 +16,39 @@ public class Post {
 		private String city;
 		private String state;
 		private String zip;
-		
+		private String address;
 		private String startDate;
 		private String endDate;
 		private String startTime;
 		private String endTime;
 		private String categories;
+		private String longitude;
+		private String latitude;
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLongitude() {
+		return this.longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return this.latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
 
 
 	public int getAuthorID() {

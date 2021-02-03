@@ -12,6 +12,9 @@ import com.yardsalebe.auth.MySQLUserDetailsService;
 public class UserController {
 
   @Autowired
+	UserRepository dao;
+
+  @Autowired
   private MySQLUserDetailsService userService;
 
   @PostMapping("/register")

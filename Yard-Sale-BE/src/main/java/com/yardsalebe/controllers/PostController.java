@@ -1,7 +1,7 @@
 package com.yardsalebe.controllers;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,27 +79,26 @@ System.out.println(state);
 	// }
 	
 	@GetMapping("/{ID}")
-    public ResponseEntity<Post> getPost(@PathVariable(value="ID") Integer id) {
-        Post foundPost = dao.findById(id).orElse(null);
+    public ResponseEntity<Post> getPost(@PathVariable(value="ID") Integer ID) {
+        Post foundPost = dao.findById(ID).orElse(null);
 
         if(foundPost == null) {
             return ResponseEntity.notFound().header("Message","Nothing found with that id").build();
         }
         return ResponseEntity.ok(foundPost);
 	}
-
 	
 	@PostMapping("")
 	public ResponseEntity<Post> postMessage(@RequestBody Post post, Principal myPrincipal) {
 		System.out.println(myPrincipal.getName());
 		post.setuserName(myPrincipal.getName());
 
-		User currentUser = userRepo.findByUsername(myPrincipal.getName());
-		post.setTimeStamp(LocalDateTime.now());
-		post.setStreetAddress(currentUser.getStreetAddress());
-		post.setCity(currentUser.getCity());
-		post.setState(currentUser.getState());
-		post.setZip(currentUser.getZip());
+		// User currentUser = userRepo.findByUsername(myPrincipal.getName());
+		// post.setTimeStamp(LocalDateTime.now());
+		// post.setStreetAddress(currentUser.getStreetAddress());
+		// post.setCity(currentUser.getCity());
+		// post.setState(currentUser.getState());
+		// post.setZip(currentUser.getZip());
 		Post createdPost = dao.save(post);
 	    return ResponseEntity.ok(createdPost);
 	}
