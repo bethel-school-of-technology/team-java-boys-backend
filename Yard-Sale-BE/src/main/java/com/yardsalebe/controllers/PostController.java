@@ -32,6 +32,24 @@ public class PostController {
 		return dao.findAll();
 	}
 
+	@GetMapping("/posts") 
+	public ResponseEntity<List<Post>> getPostByUser(Principal myPrincipal ) {
+		
+		List<Post> foundPosts = dao.findAll();
+
+		List<Post> searchPost = new ArrayList<Post>();
+		String currentUser = myPrincipal.getName();
+		for (Post post : foundPosts){
+			post.toString();
+			System.out.println(post.getState());
+			if (post.getuserName().equals(currentUser)){
+				searchPost.add(post);
+				System.out.println("found post with the state");
+			}
+		}
+        return ResponseEntity.ok(searchPost);
+	}
+
 	@GetMapping("/search/state/{state}") 
 	public ResponseEntity<List<Post>> getPostByState(@PathVariable String state) {
 		
