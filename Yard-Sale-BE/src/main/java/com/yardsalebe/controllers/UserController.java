@@ -38,7 +38,6 @@ public class UserController {
   @PutMapping("/update")
   public ResponseEntity<User> updateUser(Principal myPrincipal, @RequestBody User user) {
     User foundUser = dao.findByUsername(myPrincipal.getName());   
-    System.out.println("REQUESTED!!!"); 
     if(foundUser == null) {
       return ResponseEntity.notFound().header("Message","Nothing found with that username").build();
       }else {
