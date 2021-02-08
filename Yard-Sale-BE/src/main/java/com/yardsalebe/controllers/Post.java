@@ -1,6 +1,7 @@
 package com.yardsalebe.controllers;
 
 import javax.persistence.*;
+import java.time.*;
 
 @Entity(name="Post")
 public class Post {
@@ -8,14 +9,55 @@ public class Post {
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private int ID;
+		private int authorID;
+		private String userName;
+		private LocalDateTime timeStamp;
 		private String streetAddress;
 		private String city;
 		private String state;
 		private String zip;
+		private String address;
 		private String startDate;
 		private String endDate;
 		private String startTime;
 		private String endTime;
+		private String categories;
+		private String longitude;
+		private String latitude;
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLongitude() {
+		return this.longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return this.latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+
+
+	public int getAuthorID() {
+		return this.authorID;
+	}
+
+	public void setAuthorID(int authorID) {
+		this.authorID = authorID;
+	}
 
 	public String getStartDate() {
 		return this.startDate;
@@ -48,36 +90,56 @@ public class Post {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-		
+
+	public String getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
 		
 		public String getStreetAddress() {
-			return streetAddress;
+			return this.streetAddress;
 		}
 		public void setStreetAddress(String streetAddress) {
 			this.streetAddress = streetAddress;
 		}
 		public String getCity() {
-			return city;
+			return this.city;
 		}
 		public void setCity(String city) {
 			this.city = city;
 		}
 		public String getState() {
-			return state;
+			return this.state;
 		}
 		public void setState(String state) {
 			this.state = state;
 		}
 		public String getZip() {
-			return zip;
+			return this.zip;
 		}
 		public void setZip(String zip) {
 			this.zip = zip;
 		}
 		public int getID() {
-			return ID;
+			return this.ID;
 		}
 		public void setID(int iD) {
-			ID = iD;
+			this.ID = iD;
+		}
+		public String getuserName() {
+			return this.userName;
+		}
+		public void setuserName(String userName) {
+			this.userName = userName;
+		}
+		public LocalDateTime getTimeStamp() {
+			return this.timeStamp;
+		}
+		public void setTimeStamp(LocalDateTime timeStamp) {
+			this.timeStamp = timeStamp;
 		}
 }

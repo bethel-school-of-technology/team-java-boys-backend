@@ -11,9 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.*;
-
-import com.yardsalebe.controllers.MySQLUserDetailsService;
-
 import static com.yardsalebe.auth.AuthConstants.*;
 
 @EnableWebSecurity
@@ -37,9 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .csrf().disable()
       .authorizeRequests().antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-      .antMatchers("/user", "/login", "/user/register", "/post").permitAll()
-      .antMatchers(HttpMethod.GET, "/post/**").permitAll()
       .antMatchers(HttpMethod.GET, "/post").permitAll()
+      .and()
+      .csrf().disable()
+      .authorizeRequests().antMatchers(HttpMethod.GET).permitAll()
       .anyRequest().authenticated()
       .and()
       .addFilter(new JWTAuthenticationFilter(authenticationManager()))
