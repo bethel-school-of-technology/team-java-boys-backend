@@ -54,15 +54,15 @@ public class PostController {
 	public ResponseEntity<List<Post>> getPostByState(@PathVariable String state) {
 		
 		List<Post> foundPosts = dao.findAll();
-System.out.println(state);
+// System.out.println(state);
 		List<Post> searchPost = new ArrayList<Post>();
 		
 		for (Post post : foundPosts){
 			post.toString();
-			System.out.println(post.getState());
+			// System.out.println(post.getState());
 			if (post.getState().equals(state)){
 				searchPost.add(post);
-				System.out.println("found post with the state");
+				// System.out.println("found post with the state");
 			}
 		}
         return ResponseEntity.ok(searchPost);
@@ -108,7 +108,7 @@ System.out.println(state);
 	
 	@PostMapping("")
 	public ResponseEntity<Post> postMessage(@RequestBody Post post, Principal myPrincipal) {
-		System.out.println(myPrincipal.getName());
+		// System.out.println(myPrincipal.getName());
 		post.setuserName(myPrincipal.getName());
 
 		// User currentUser = userRepo.findByUsername(myPrincipal.getName());
