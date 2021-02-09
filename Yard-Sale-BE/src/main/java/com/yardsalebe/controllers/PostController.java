@@ -41,10 +41,10 @@ public class PostController {
 		String currentUser = myPrincipal.getName();
 		for (Post post : foundPosts){
 			post.toString();
-			System.out.println(post.getState());
+			// System.out.println(post.getState());
 			if (post.getuserName().equals(currentUser)){
 				searchPost.add(post);
-				System.out.println("found post with the state");
+				// System.out.println("found post with the state");
 			}
 		}
         return ResponseEntity.ok(searchPost);
