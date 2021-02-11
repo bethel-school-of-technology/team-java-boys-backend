@@ -41,29 +41,29 @@ public class UserController {
     if(foundUser == null) {
       return ResponseEntity.notFound().header("Message","Nothing found with that username").build();
       }else {
-        if(user.getFirstName().length() != 0 ) {
+        if(user.getFirstName() != null && user.getFirstName().length() != 0 ) {
           foundUser.setFirstName(user.getFirstName());
         }
-        if(user.getLastName().length() != 0 ) {
+        if(user.getLastName() != null && user.getLastName().length() != 0) {
           foundUser.setLastName(user.getLastName());
         }
-        if(user.getStreetAddress().length() != 0 ) {
+        if(user.getStreetAddress() != null && user.getStreetAddress().length() != 0 ) {
           foundUser.setStreetAddress(user.getStreetAddress());
         }
-        if(user.getCity().length() != 0 ) {
+        if(user.getCity() != null && user.getCity().length() != 0 ) {
           foundUser.setCity(user.getCity());
         }
-        if(user.getState().length() != 0 ) {
+        if(user.getState() != null && user.getState().length() != 0 ) {
           foundUser.setState(user.getState());
         }
-        if(user.getZip().length() != 0 ) {
+        if(user.getZip() != null && user.getZip().length() != 0 ) {
           foundUser.setZip(user.getZip());
         }
-        if(user.getEmail().length() != 0 ) {
+        if(user.getEmail() != null && user.getEmail().length() != 0 ) {
           foundUser.setEmail(user.getEmail());
         }
         User updatedUser = dao.save(foundUser);
         return ResponseEntity.ok(updatedUser);
     }
-}
+  }
 }
