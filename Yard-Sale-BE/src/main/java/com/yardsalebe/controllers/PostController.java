@@ -95,7 +95,14 @@ public class PostController {
     //     }
     //     return ResponseEntity.ok(foundPost);
 	// }
-	
+		
+	@PostMapping("")
+	public ResponseEntity<Post> postMessage(@RequestBody Post post, Principal myPrincipal) {
+		post.setuserName(myPrincipal.getName());
+		Post createdPost = dao.save(post);
+	    return ResponseEntity.ok(createdPost);
+	}
+
 	@GetMapping("/{ID}")
     public ResponseEntity<Post> getPost(@PathVariable(value="ID") Integer ID) {
         Post foundPost = dao.findById(ID).orElse(null);
@@ -105,30 +112,45 @@ public class PostController {
         }
         return ResponseEntity.ok(foundPost);
 	}
-	
-	@PostMapping("")
-	public ResponseEntity<Post> postMessage(@RequestBody Post post, Principal myPrincipal) {
-		// System.out.println(myPrincipal.getName());
-		post.setuserName(myPrincipal.getName());
 
-		// User currentUser = userRepo.findByUsername(myPrincipal.getName());
-		// post.setTimeStamp(LocalDateTime.now());
-		// post.setStreetAddress(currentUser.getStreetAddress());
-		// post.setCity(currentUser.getCity());
-		// post.setState(currentUser.getState());
-		// post.setZip(currentUser.getZip());
-		Post createdPost = dao.save(post);
-	    return ResponseEntity.ok(createdPost);
-	}
 	
 	@PutMapping("/{ID}")
     public ResponseEntity<Post> updatePost(@PathVariable(value="ID") Integer id, @RequestBody Post post) {
-		Post foundPost = dao.findById(id).orElse(null);
-    	
+		Post foundPost = dao.findById(id).orElse(null);    	
     	if(foundPost == null) {
     		return ResponseEntity.notFound().header("Message","Nothing found with that id").build();
         }else {
-        	Post updatedPost = dao.save(post);
+			// System.out.println(post.getStreetAddress());
+			// System.out.println(post.getCity());
+			// if(post.getStreetAddress() != null && post.getStreetAddress().length() != 0 ) {
+			// System.out.println("Reached found address post");
+			// 	foundPost.setStreetAddress(post.getStreetAddress());
+			// }
+			// if(post.getCity() != null && post.getCity().length() != 0) {
+			// 	foundPost.setCity(post.getCity());
+			// }
+			// if(post.getState() != null && post.getState().length() != 0 ) {
+			// 	foundPost.setState(post.getState());
+			// }
+			// if(post.getZip() != null && post.getZip().length() != 0 ) {
+			// 	foundPost.setZip(post.getZip());
+			// }
+			if(post.getStartDate() != null && post.getStartDate().length() != 0 ) {
+				foundPost.setStartDate(post.getStartDate());
+			}
+			if(post.getEndDate() != null && post.getEndDate().length() != 0 ) {
+				foundPost.setEndDate(post.getEndDate());
+			}
+			if(post.getStartTime() != null && post.getStartTime().length() != 0 ) {
+				foundPost.setStartTime(post.getStartTime());
+			}
+			if(post.getEndTime() != null && post.getEndTime().length() != 0 ) {
+				foundPost.setEndTime(post.getEndTime());
+			}
+			if(post.getCategories() != null && post.getCategories().length() != 0 ) {
+				foundPost.setCategories(post.getCategories());
+			}
+        	Post updatedPost = dao.save(foundPost);
         	return ResponseEntity.ok(updatedPost);
     	}
 	}
